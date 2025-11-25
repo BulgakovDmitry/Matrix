@@ -15,10 +15,18 @@ protected:
     std::size_t capacity_{0};
 
 public:
+    Buffer() = default;
+
     explicit Buffer(std::size_t n_cells) 
         : data_{!n_cells ? nullptr : static_cast<T*>(::operator new(n_cells * sizeof(T)))}
         , size_{0}
         , capacity_{n_cells}
+        {}
+    
+    Buffer(std::size_t n_rows, std::size_t n_columns)
+        : data_{!(n_rows && n_columns) ? nullptr : static_cast<T*>(::operator new(n_columns * n_rows * sizeof(T)))}
+        , size_{0}
+        , capacity_{n_columns * n_rows}
         {}
 
     Buffer(const Buffer&) = delete;
@@ -31,7 +39,7 @@ public:
     } 
 
     ~Buffer() {
-        std::destroy(data_, data_ + capacity_);
+        std::destroy(data_, data_ + size_);
         ::operator delete(data_);
     }
 
@@ -41,10 +49,6 @@ private:
         std::swap(size_, rhs.size_);
         std::swap(capacity_, rhs.capacity_);
     }
-
-    
-
-
 };
 
 } // namespace matrix
