@@ -1,0 +1,5 @@
+#ifndef INCLUDE_BUFFER_HPP
+#define INCLUDE_BUFFER_HPP
+
+
+#endif // INCLUDE_BUFFER_HPP
