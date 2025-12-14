@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/Matrix.dir/src/main.cpp.o -o Matrix 
+/usr/bin/c++ -g -Wl,--dependency-file=CMakeFiles/Matrix.dir/link.d CMakeFiles/Matrix.dir/src/main.cpp.o -o Matrix

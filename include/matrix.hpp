@@ -18,7 +18,7 @@ public:
     Matrix(std::size_t n_rows, std::size_t n_columns) 
         : n_rows_{n_rows}
         , n_columns_{n_columns}
-        , data_(n_rows, n_columns)
+        , data_{std::make_unique<Buffer<T>>(n_rows, n_columns)}
         {}
 
     // Matrix(const Matrix&) = delete;
