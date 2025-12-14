@@ -1,15 +1,18 @@
 #ifndef INCLUDE_BUFFER_HPP
 #define INCLUDE_BUFFER_HPP
 
+#include "ibuffer.hpp"
+
 #include <cstddef>
 #include <utility> 
 #include <memory>
+#include <new> 
 
 namespace matrix {
 
 template<typename T>
-class Buffer {    
-protected:
+class Buffer final : public IBuffer<T> {    
+private:
     T* data_{nullptr};
     std::size_t size_{0};
     std::size_t capacity_{0};
@@ -38,10 +41,16 @@ public:
         return *this;
     } 
 
-    ~Buffer() {
+    /*——————————————————————————————————————— IBuffer ———————————————————————————————————————————*/
+    ~Buffer() override {
         std::destroy(data_, data_ + size_);
         ::operator delete(data_);
     }
+
+    const T*    get_data()     const noexcept override { return data_;     }
+    std::size_t get_size()     const noexcept override { return size_;     }
+    std::size_t get_capacity() const noexcept override { return capacity_; }
+    /*———————————————————————————————————————————————————————————————————————————————————————————*/
 
 private:
     void swap(Buffer & rhs) noexcept {

@@ -76,4 +76,27 @@
     "cmake.buildDirectory": "build",
     "cmake.configureOnOpen": true,
     "cSpell.enabled": false,
+
+    "todo-tree.general.tags": [
+        "TODO",
+        "FIXME",
+        "BUG",
+        "NOTE",
+        "HACK",
+        "OPTIMIZE",
+        "REFACTOR"
+    ],
+    "todo-tree.highlights.enabled": true,
+    "todo-tree.highlights.defaultHighlight": {
+        "type": "text"
+    },
+    "todo-tree.highlights.customHighlight": {
+        "TODO": { "foreground": "#00e676", "fontStyle": "bold" },
+        "FIXME": { "foreground": "#ff5252", "fontStyle": "bold" },
+        "BUG": { "foreground": "#ff1744", "fontStyle": "bold" },
+        "NOTE": { "foreground": "#448aff" },
+        "OPTIMIZE": { "foreground": "#ffd600" },
+        "REFACTOR": { "foreground": "#ba68c8" }
+    }
+    
 }
