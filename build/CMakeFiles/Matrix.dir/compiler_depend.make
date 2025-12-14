@@ -260,6 +260,42 @@ CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matri
   /usr/lib/linux/uapi/x86/asm/unistd.h \
   /usr/lib/linux/uapi/x86/asm/unistd_64.h
 
+Matrix: /lib/x86_64-linux-gnu/libc.so.6 \
+  /lib/x86_64-linux-gnu/libm.so.6 \
+  /lib/x86_64-linux-gnu/libmvec.so.1 \
+  /lib64/ld-linux-x86-64.so.2 \
+  /usr/lib/x86_64-linux-gnu/Scrt1.o \
+  /usr/lib/x86_64-linux-gnu/crti.o \
+  /usr/lib/x86_64-linux-gnu/crtn.o \
+  /usr/lib/x86_64-linux-gnu/libc.so \
+  /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 \
+  /usr/lib/x86_64-linux-gnu/libm.so \
+  /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o \
+  /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o \
+  /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a \
+  /usr/lib/gcc/x86_64-linux-gnu/14/libgcc_s.so \
+  /usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so \
+  /usr/lib/x86_64-linux-gnu/libc_nonshared.a \
+  CMakeFiles/Matrix.dir/src/main.cpp.o
+
+
+CMakeFiles/Matrix.dir/src/main.cpp.o:
+
+/usr/lib/x86_64-linux-gnu/libc_nonshared.a:
+
+/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so:
+
+/usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a:
+
+/usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o:
+
+/usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o:
+
+/usr/lib/x86_64-linux-gnu/libc.so:
+
+/usr/lib/x86_64-linux-gnu/crti.o:
+
+/lib64/ld-linux-x86-64.so.2:
 
 /usr/lib/linux/uapi/x86/asm/unistd_64.h:
 
@@ -280,6 +316,8 @@ CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matri
 /usr/include/c++/14/new:
 
 /usr/include/c++/14/bits/max_size_type.h:
+
+/lib/x86_64-linux-gnu/libm.so.6:
 
 /usr/include/c++/14/iosfwd:
 
@@ -399,6 +437,8 @@ CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matri
 
 /usr/include/c++/14/bits/basic_ios.tcc:
 
+/lib/x86_64-linux-gnu/libc.so.6:
+
 /usr/include/c++/14/pstl/glue_memory_defs.h:
 
 /usr/include/c++/14/ext/concurrence.h:
@@ -453,6 +493,8 @@ CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matri
 
 /usr/include/linux/limits.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/14/libgcc_s.so:
+
 /usr/include/c++/14/bit:
 
 /usr/include/c++/14/cstdint:
@@ -502,6 +544,8 @@ CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matri
 /usr/include/c++/14/bits/basic_string.h:
 
 /home/dima/Desktop/coding/coding_C++/Matrix/src/main.cpp:
+
+/usr/lib/x86_64-linux-gnu/libm.so:
 
 /usr/include/c++/14/ios:
 
@@ -587,6 +631,8 @@ CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matri
 
 /usr/include/x86_64-linux-gnu/bits/sched.h:
 
+/usr/lib/x86_64-linux-gnu/crtn.o:
+
 /usr/include/c++/14/bits/hash_bytes.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
@@ -595,11 +641,15 @@ CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matri
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
+/usr/lib/x86_64-linux-gnu/Scrt1.o:
+
 /usr/include/c++/14/typeinfo:
 
 /usr/include/ctype.h:
 
 /usr/include/features.h:
+
+/usr/lib/x86_64-linux-gnu/libgcc_s.so.1:
 
 /usr/include/linux/close_range.h:
 
@@ -616,6 +666,8 @@ CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matri
 /usr/include/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+
+/lib/x86_64-linux-gnu/libmvec.so.1:
 
 /usr/include/stdlib.h:
 
