@@ -2,22 +2,28 @@
 #define INCLUDE_DUMP_HPP
 
 #include <ostream>
-#include <matrix.hpp>
+#include "imatrix.hpp"
 
 namespace matrix {
 
 template<typename T>
-void matrix_dump(const Matrix<T>& matrix, std::ostream &os) {
+void matrix_dump(const IMatrix<T>& matrix, std::ostream &os) {
     os << "Matrix dump: {\n";
 
-    std::size_t n_rows = matrix.get_n_rows();
-    std::size_t n_columns = matrix.get_n_columns();
+    const std::size_t n_rows = matrix.get_n_rows();
+    const std::size_t n_columns = matrix.get_n_columns();
+    const T* data = matrix.get_data();
+    std::cout << "n_rows = " << n_rows << '\n';
+    std::cout << "n_columns = " << n_columns << '\n';
+
+
     for (std::size_t i = 0; i < n_rows; ++i) {
-        for (std::size_t j = 0; j < n_columns) {
-            os << '\t' << matrix.get_data()[i][j];
+        for (std::size_t j = 0; j < n_columns; ++j) {
+            os << '\t' << data[i * n_columns + j];
         }
         os << '\n';
     }
+    os << "}\n";
 }
 
 } // namespace matrix

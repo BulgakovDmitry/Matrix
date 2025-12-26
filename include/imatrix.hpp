@@ -1,24 +1,25 @@
-#ifndef INCLUDE_IBUFFER_HPP
-#define INCLUDE_IBUFFER_HPP
+#ifndef INCLUDE_IMATRIX_HPP
+#define INCLUDE_IMATRIX_HPP
 
-#include <cstddef>
-#include <memory>
-#include <stdexcept>
+#include "ibuffer.hpp"
+#include "buffer.hpp"
 
 namespace matrix {
 
 template<typename T>
-struct IBuffer { 
-    virtual ~IBuffer() = default;
+struct IMatrix {
+    virtual ~IMatrix() = default;
 
     /*——————————————————————————————————————— getters ———————————————————————————————————————————*/
-    virtual T*          get_data()           noexcept = 0;
-    virtual const T*    get_data()     const noexcept = 0;
-    virtual std::size_t get_size()     const noexcept = 0;
-    virtual std::size_t get_capacity() const noexcept = 0;
+    [[nodiscard]] virtual std::size_t get_n_rows()    const noexcept = 0;
+    [[nodiscard]] virtual std::size_t get_n_columns() const noexcept = 0;
+    [[nodiscard]] virtual std::size_t get_size()      const noexcept = 0;
+
+    [[nodiscard]] virtual const T* get_data() const noexcept = 0;
+    [[nodiscard]] virtual       T* get_data()       noexcept = 0;
     /*———————————————————————————————————————————————————————————————————————————————————————————*/
 };
 
 } // namespace matrix
 
-#endif // INCLUDE_IBUFFER_HPP
+#endif // INCLUDE_IMATRIX_HPP

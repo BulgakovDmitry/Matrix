@@ -3,7 +3,9 @@
 
 CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matrix/src/main.cpp \
   /home/dima/Desktop/coding/coding_C++/Matrix/include/buffer.hpp \
+  /home/dima/Desktop/coding/coding_C++/Matrix/include/dump.hpp \
   /home/dima/Desktop/coding/coding_C++/Matrix/include/ibuffer.hpp \
+  /home/dima/Desktop/coding/coding_C++/Matrix/include/imatrix.hpp \
   /home/dima/Desktop/coding/coding_C++/Matrix/include/matrix.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
@@ -40,6 +42,7 @@ CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matri
   /usr/include/c++/14/bits/hash_bytes.h \
   /usr/include/c++/14/bits/invoke.h \
   /usr/include/c++/14/bits/ios_base.h \
+  /usr/include/c++/14/bits/istream.tcc \
   /usr/include/c++/14/bits/iterator_concepts.h \
   /usr/include/c++/14/bits/locale_classes.h \
   /usr/include/c++/14/bits/locale_classes.tcc \
@@ -115,6 +118,8 @@ CMakeFiles/Matrix.dir/src/main.cpp.o: /home/dima/Desktop/coding/coding_C++/Matri
   /usr/include/c++/14/initializer_list \
   /usr/include/c++/14/ios \
   /usr/include/c++/14/iosfwd \
+  /usr/include/c++/14/iostream \
+  /usr/include/c++/14/istream \
   /usr/include/c++/14/memory \
   /usr/include/c++/14/new \
   /usr/include/c++/14/numbers \
@@ -299,23 +304,23 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/lib/linux/uapi/x86/asm/unistd_64.h:
 
-/usr/include/c++/14/system_error:
-
-/usr/include/c++/14/cstdlib:
-
-/usr/include/c++/14/bits/cxxabi_init_exception.h:
+/usr/lib/linux/uapi/x86/asm/posix_types.h:
 
 /usr/include/c++/14/stdexcept:
 
 /usr/include/c++/14/cwchar:
-
-/usr/include/c++/14/pstl/pstl_config.h:
 
 /usr/include/x86_64-linux-gnu/bits/environments.h:
 
 /usr/include/c++/14/new:
 
 /usr/include/c++/14/bits/max_size_type.h:
+
+/usr/include/c++/14/iostream:
+
+/usr/include/c++/14/bits/requires_hosted.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
 /lib/x86_64-linux-gnu/libm.so.6:
 
@@ -335,17 +340,7 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/c++/14/cstddef:
 
-/usr/include/x86_64-linux-gnu/bits/endian.h:
-
-/usr/include/c++/14/ostream:
-
-/usr/include/c++/14/compare:
-
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-
-/usr/include/c++/14/string_view:
-
-/usr/include/x86_64-linux-gnu/bits/syscall.h:
 
 /usr/include/c++/14/debug/debug.h:
 
@@ -353,15 +348,9 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/c++/14/bits/version.h:
 
-/usr/include/c++/14/string:
-
-/usr/include/c++/14/climits:
-
 /usr/include/c++/14/bits/uses_allocator_args.h:
 
 /usr/include/c++/14/bits/unique_ptr.h:
-
-/usr/include/c++/14/tuple:
 
 /usr/include/linux/stddef.h:
 
@@ -370,6 +359,10 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
 /usr/include/features-time64.h:
+
+/usr/lib/linux/uapi/x86/asm/posix_types_64.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
 /usr/include/x86_64-linux-gnu/c++/14/bits/os_defines.h:
 
@@ -387,21 +380,21 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
-/usr/include/c++/14/streambuf:
-
-/usr/include/c++/14/bits/string_view.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
-
 /usr/include/c++/14/bits/stl_iterator.h:
-
-/usr/include/c++/14/bits/stl_algobase.h:
 
 /usr/include/asm-generic/errno-base.h:
 
+/usr/include/c++/14/bits/stl_algobase.h:
+
 /usr/include/c++/14/bits/std_mutex.h:
+
+/usr/include/c++/14/pstl/pstl_config.h:
+
+/usr/include/c++/14/ostream:
+
+/usr/include/c++/14/compare:
+
+/usr/include/x86_64-linux-gnu/bits/endian.h:
 
 /usr/include/c++/14/bits/shared_ptr_base.h:
 
@@ -415,10 +408,6 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
 
-/usr/include/c++/14/bits/requires_hosted.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
-
 /usr/include/c++/14/bits/refwrap.h:
 
 /usr/include/c++/14/bits/ranges_uninitialized.h:
@@ -429,9 +418,9 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/c++/14/bits/ranges_cmp.h:
 
-/usr/include/c++/14/bits/cpp_type_traits.h:
+/usr/include/c++/14/bits/ranges_base.h:
 
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
+/usr/include/c++/14/bits/range_access.h:
 
 /usr/include/c++/14/bits/charconv.h:
 
@@ -443,12 +432,6 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/c++/14/ext/concurrence.h:
 
-/usr/include/c++/14/bits/atomic_wait.h:
-
-/usr/include/c++/14/bits/stl_pair.h:
-
-/usr/include/c++/14/bits/ostream_insert.h:
-
 /usr/include/c++/14/bits/stl_uninitialized.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
@@ -458,14 +441,6 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
 /usr/include/c++/14/bits/allocator.h:
-
-/usr/include/c++/14/numbers:
-
-/home/dima/Desktop/coding/coding_C++/Matrix/include/matrix.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
-
-/usr/include/c++/14/bits/allocated_ptr.h:
 
 /usr/include/c++/14/bits/stl_raw_storage_iter.h:
 
@@ -477,6 +452,10 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/c++/14/bits/alloc_traits.h:
 
+/usr/include/c++/14/cstdlib:
+
+/usr/include/c++/14/system_error:
+
 /usr/include/asm-generic/posix_types.h:
 
 /usr/include/stdc-predef.h:
@@ -486,6 +465,8 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 /usr/include/c++/14/bits/ranges_util.h:
 
 /usr/include/c++/14/bits/memory_resource.h:
+
+/usr/include/x86_64-linux-gnu/bits/sched.h:
 
 /usr/include/c++/14/bits/cxxabi_forced.h:
 
@@ -499,6 +480,14 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/c++/14/cstdint:
 
+/usr/include/c++/14/bits/string_view.tcc:
+
+/usr/include/c++/14/streambuf:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
+
 /usr/include/c++/14/memory:
 
 /usr/include/c++/14/bits/stl_function.h:
@@ -506,6 +495,8 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 /usr/include/c++/14/bits/predefined_ops.h:
 
 /usr/include/syscall.h:
+
+/usr/include/c++/14/backward/binders.h:
 
 /usr/include/c++/14/bits/shared_ptr.h:
 
@@ -521,13 +512,9 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/c++/14/bits/move.h:
 
-/usr/include/alloca.h:
-
-/usr/include/c++/14/bits/ptr_traits.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
 /home/dima/Desktop/coding/coding_C++/Matrix/include/buffer.hpp:
+
+/usr/include/c++/14/bits/invoke.h:
 
 /usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
 
@@ -537,7 +524,39 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/c++/14/bits/char_traits.h:
 
+/usr/lib/x86_64-linux-gnu/crtn.o:
+
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
+
+/usr/include/c++/14/bits/hash_bytes.h:
+
+/usr/include/c++/14/istream:
+
+/home/dima/Desktop/coding/coding_C++/Matrix/include/dump.hpp:
+
+/lib/x86_64-linux-gnu/libmvec.so.1:
+
+/usr/include/stdlib.h:
+
+/usr/include/c++/14/climits:
+
+/usr/include/c++/14/string:
+
+/usr/include/c++/14/cstdio:
+
+/usr/include/c++/14/bits/utility.h:
+
+/usr/include/c++/14/bits/locale_classes.tcc:
+
+/usr/include/linux/posix_types.h:
+
 /usr/include/c++/14/bits/nested_exception.h:
+
+/home/dima/Desktop/coding/coding_C++/Matrix/include/matrix.hpp:
+
+/usr/include/c++/14/numbers:
+
+/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
 /usr/include/c++/14/bits/locale_facets.h:
 
@@ -551,7 +570,23 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/asm-generic/int-ll64.h:
 
-/usr/include/c++/14/backward/binders.h:
+/usr/include/c++/14/bits/allocated_ptr.h:
+
+/usr/include/alloca.h:
+
+/usr/include/c++/14/bits/ptr_traits.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+
+/usr/include/c++/14/bits/cpp_type_traits.h:
+
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+/usr/include/c++/14/bits/cxxabi_init_exception.h:
+
+/usr/include/x86_64-linux-gnu/bits/syscall.h:
+
+/usr/include/c++/14/string_view:
 
 /usr/include/c++/14/ext/atomicity.h:
 
@@ -567,25 +602,19 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/pthread.h:
 
-/usr/include/c++/14/bits/invoke.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/14/include/stddef.h:
-
-/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
-
-/usr/include/c++/14/cstdio:
-
-/usr/include/c++/14/bits/utility.h:
-
-/usr/include/c++/14/bits/locale_classes.tcc:
-
-/usr/include/linux/posix_types.h:
-
 /usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
 
 /usr/include/c++/14/bits/ios_base.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/include/limits.h:
+
+/usr/include/c++/14/bits/atomic_wait.h:
+
+/usr/include/c++/14/bits/stl_pair.h:
+
+/usr/include/c++/14/bits/ostream_insert.h:
+
+/usr/include/c++/14/bits/istream.tcc:
 
 /usr/include/c++/14/bits/locale_classes.h:
 
@@ -605,9 +634,15 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/stdio.h:
 
-/usr/include/c++/14/bits/stl_construct.h:
+/usr/include/c++/14/ext/aligned_buffer.h:
 
-/usr/include/c++/14/bits/ranges_base.h:
+/usr/include/c++/14/bits/align.h:
+
+/usr/include/c++/14/bits/concept_check.h:
+
+/usr/include/c++/14/bits/ostream.tcc:
+
+/usr/include/c++/14/bits/stl_construct.h:
 
 /usr/include/c++/14/bits/uses_allocator.h:
 
@@ -619,23 +654,11 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/c++/14/bits/memoryfwd.h:
 
-/usr/include/c++/14/bits/range_access.h:
+/usr/include/c++/14/tuple:
 
-/usr/include/c++/14/ext/aligned_buffer.h:
+/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
-/usr/include/c++/14/bits/concept_check.h:
-
-/usr/include/c++/14/bits/ostream.tcc:
-
-/usr/include/c++/14/bits/align.h:
-
-/usr/include/x86_64-linux-gnu/bits/sched.h:
-
-/usr/lib/x86_64-linux-gnu/crtn.o:
-
-/usr/include/c++/14/bits/hash_bytes.h:
-
-/usr/include/x86_64-linux-gnu/bits/waitflags.h:
+/usr/lib/gcc/x86_64-linux-gnu/14/include/stddef.h:
 
 /usr/include/c++/14/type_traits:
 
@@ -659,17 +682,9 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/linux/types.h:
 
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/usr/lib/linux/uapi/x86/asm/posix_types_64.h:
-
 /usr/include/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
-
-/lib/x86_64-linux-gnu/libmvec.so.1:
-
-/usr/include/stdlib.h:
 
 /usr/include/sched.h:
 
@@ -684,6 +699,10 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
+
+/usr/lib/linux/uapi/x86/asm/unistd.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
@@ -714,8 +733,6 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
-
-/usr/lib/linux/uapi/x86/asm/posix_types.h:
 
 /usr/include/c++/14/bits/iterator_concepts.h:
 
@@ -753,9 +770,9 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/asm-generic/types.h:
 
-/usr/include/asm-generic/bitsperlong.h:
-
 /usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h:
+
+/usr/include/asm-generic/bitsperlong.h:
 
 /usr/include/c++/14/utility:
 
@@ -811,6 +828,8 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 
 /usr/include/x86_64-linux-gnu/c++/14/bits/gthr-default.h:
 
+/home/dima/Desktop/coding/coding_C++/Matrix/include/imatrix.hpp:
+
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/x86_64-linux-gnu/sys/single_threaded.h:
@@ -824,7 +843,3 @@ CMakeFiles/Matrix.dir/src/main.cpp.o:
 /usr/lib/gcc/x86_64-linux-gnu/14/include/syslimits.h:
 
 /usr/lib/linux/uapi/x86/asm/bitsperlong.h:
-
-/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
-
-/usr/lib/linux/uapi/x86/asm/unistd.h:

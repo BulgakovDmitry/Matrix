@@ -47,7 +47,9 @@ public:
         ::operator delete(data_);
     }
 
+          T*    get_data()           noexcept override { return data_;     }
     const T*    get_data()     const noexcept override { return data_;     }
+
     std::size_t get_size()     const noexcept override { return size_;     }
     std::size_t get_capacity() const noexcept override { return capacity_; }
     /*———————————————————————————————————————————————————————————————————————————————————————————*/
