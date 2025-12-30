@@ -7,6 +7,7 @@
 #include <utility> 
 #include <memory>
 #include <new> 
+#include <algorithm>
 
 namespace matrix {
 
@@ -20,17 +21,18 @@ private:
 public:
     Buffer() = default;
 
-    explicit Buffer(std::size_t n_cells) 
+    explicit Buffer(std::size_t n_cells)
         : data_{!n_cells ? nullptr : static_cast<T*>(::operator new(n_cells * sizeof(T)))}
-        , size_{0}
+        , size_{n_cells}
         , capacity_{n_cells}
-        {}
+    {
+        if (data_) {
+            std::uninitialized_value_construct_n(data_, n_cells);
+        }
+    }
     
     Buffer(std::size_t n_rows, std::size_t n_columns)
-        : data_{!(n_rows && n_columns) ? nullptr : static_cast<T*>(::operator new(n_columns * n_rows * sizeof(T)))}
-        , size_{0}
-        , capacity_{n_columns * n_rows}
-        {}
+        : Buffer(n_rows * n_columns) {}
 
     Buffer(const Buffer&) = delete;
     Buffer& operator=(const Buffer&) = delete;
@@ -54,7 +56,11 @@ public:
     std::size_t get_capacity() const noexcept override { return capacity_; }
 
     std::unique_ptr<IBuffer<T>> clone() const override {
-        return std::make_unique<Buffer>(*this);
+        auto out = std::make_unique<Buffer>(capacity_);
+        if (capacity_ != 0) {
+            std::copy_n(data_, capacity_, out->data_);
+        }
+        return out;
     }
     /*———————————————————————————————————————————————————————————————————————————————————————————*/
 

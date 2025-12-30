@@ -8,9 +8,9 @@ void driver() {
     std::size_t M;
     std::cin >> M;
     
-    matrix::Matrix<int> matrix(M, M);
+    matrix::Matrix<double> matrix(M, M);
 
-    int v = 4;
+    double v = 4;
     
     for (std::size_t i = 0; i < M; ++i) {
         for (std::size_t j = 0; j < M; ++j) {
@@ -22,10 +22,10 @@ void driver() {
             }
         }
     }
-    matrix::matrix_dump<int>(matrix, std::cout);
-
+    matrix::matrix_dump<double>(matrix, std::cout);
     try {
-        int determinant = matrix.calculate_determinant();
+        double determinant = matrix.calculate_determinant();
+        std::cout << "determinant = " << determinant << '\n';
     } catch (std::runtime_error& e) {
         std::cerr << e.what();
     }

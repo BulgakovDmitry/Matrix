@@ -34,7 +34,7 @@ public:
     Matrix(const Matrix& rhs) 
         : n_rows_(rhs.n_rows_)
         , n_columns_(rhs.n_columns_)
-        , data_(rhs.data_ ? rhs.data->clone() : nullptr)
+        , data_(rhs.data_ ? rhs.data_->clone() : nullptr)
         {}
 
     Matrix& operator=(const Matrix& rhs) {
@@ -67,7 +67,6 @@ public:
 
     [[nodiscard]] bool is_square() const noexcept { return n_rows_ == n_columns_; }
 
-    template<typename T>
     T calculate_determinant() const {
         if (!is_square()) {
             throw std::runtime_error("it is impossible to calculate the determinant of a non-square matrix\n");
@@ -75,16 +74,62 @@ public:
 
         std::size_t size = n_rows_;
 
-        if (size == 0) return static_cast<T>(1);
+        if (size == 0) return (T)1;
         if (size == 1) return *(data_->get_data());
 
         Matrix tmp(*this);
         T* a = tmp.data_->get_data();
 
-        
-        //TODO
-        
-        return 1;
+        auto idx = [size](std::size_t i, std::size_t j) -> std::size_t {
+            return i * size + j;
+        };
+
+        int sign = 1;
+
+        for (std::size_t k = 0; k < size; ++k) {
+            // ищем строку с максимальным |a[i][k]|
+            std::size_t p = k;
+            T best = std::abs(a[idx(k, k)]);
+            for (std::size_t i = k + 1; i < size; ++i) {
+                const T cur = std::abs(a[idx(i, k)]);
+                if (cur > best) {
+                    best = cur;
+                    p = i;
+                }
+            }
+
+            if (cmp::is_zero(best)) {
+                return T(0);
+            }
+
+            // swap rows => меняется знак det
+            if (p != k) {
+                for (std::size_t j = 0; j < size; ++j) {
+                    std::swap(a[idx(k, j)], a[idx(p, j)]);
+                }
+                sign = -sign;
+            }
+
+            const T pivot = a[idx(k, k)];
+            if (cmp::is_zero(pivot)) {
+                return T(0);
+            }
+
+            // зануляем элементы ниже диагонали
+            for (std::size_t i = k + 1; i < size; ++i) {
+                const T factor = a[idx(i, k)] / pivot;
+                a[idx(i, k)] = T(0);
+                for (std::size_t j = k + 1; j < size; ++j) {
+                    a[idx(i, j)] -= factor * a[idx(k, j)];
+                }
+            }
+        }
+
+        T det = (sign > 0) ? T(1) : T(-1);
+        for (std::size_t i = 0; i < size; ++i) {
+            det *= a[idx(i, i)];
+        }
+        return det;
     }
 
 
@@ -100,10 +145,7 @@ private:
         std::swap(n_rows_, rhs.n_rows_);
         std::swap(n_columns_, rhs.n_columns_);
         std::swap(data_, rhs.data_);
-    }
-
-    enum class Sign : bool {positive, negative};
-    
+    }    
 };
 
 } // namespace matrix
