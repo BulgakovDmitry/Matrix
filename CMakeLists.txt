@@ -20,3 +20,6 @@ add_executable(Matrix
 target_include_directories(Matrix PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+
+enable_testing()
+add_subdirectory(tests)

@@ -78,7 +78,7 @@ public:
         if (size == 1) return *(data_->get_data());
 
         Matrix tmp(*this);
-        T* a = tmp.data_->get_data();
+        T* data = tmp.data_->get_data();
 
         auto idx = [size](std::size_t i, std::size_t j) -> std::size_t {
             return i * size + j;
@@ -89,9 +89,9 @@ public:
         for (std::size_t k = 0; k < size; ++k) {
             // ищем строку с максимальным |a[i][k]|
             std::size_t p = k;
-            T best = std::abs(a[idx(k, k)]);
+            T best = std::abs(data[idx(k, k)]);
             for (std::size_t i = k + 1; i < size; ++i) {
-                const T cur = std::abs(a[idx(i, k)]);
+                const T cur = std::abs(data[idx(i, k)]);
                 if (cur > best) {
                     best = cur;
                     p = i;
@@ -105,29 +105,29 @@ public:
             // swap rows => меняется знак det
             if (p != k) {
                 for (std::size_t j = 0; j < size; ++j) {
-                    std::swap(a[idx(k, j)], a[idx(p, j)]);
+                    std::swap(data[idx(k, j)], data[idx(p, j)]);
                 }
                 sign = -sign;
             }
 
-            const T pivot = a[idx(k, k)];
+            const T pivot = data[idx(k, k)];
             if (cmp::is_zero(pivot)) {
                 return T(0);
             }
 
             // зануляем элементы ниже диагонали
             for (std::size_t i = k + 1; i < size; ++i) {
-                const T factor = a[idx(i, k)] / pivot;
-                a[idx(i, k)] = T(0);
+                const T factor = data[idx(i, k)] / pivot;
+                data[idx(i, k)] = T(0);
                 for (std::size_t j = k + 1; j < size; ++j) {
-                    a[idx(i, j)] -= factor * a[idx(k, j)];
+                    data[idx(i, j)] -= factor * data[idx(k, j)];
                 }
             }
         }
 
         T det = (sign > 0) ? T(1) : T(-1);
         for (std::size_t i = 0; i < size; ++i) {
-            det *= a[idx(i, i)];
+            det *= data[idx(i, i)];
         }
         return det;
     }

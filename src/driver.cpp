@@ -22,10 +22,10 @@ void driver() {
             }
         }
     }
-    matrix::matrix_dump<double>(matrix, std::cout);
+    // matrix::matrix_dump<double>(matrix, std::cout);
     try {
         double determinant = matrix.calculate_determinant();
-        std::cout << "determinant = " << determinant << '\n';
+        std::cout << /*"determinant = " <<*/ determinant << '\n';
     } catch (std::runtime_error& e) {
         std::cerr << e.what();
     }
