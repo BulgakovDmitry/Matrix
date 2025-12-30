@@ -129,6 +129,30 @@ Matrix/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Matrix.dir/build.make CMakeFiles/Matrix.dir/build
 .PHONY : Matrix/fast
 
+src/driver.o: src/driver.cpp.o
+.PHONY : src/driver.o
+
+# target to build an object file
+src/driver.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Matrix.dir/build.make CMakeFiles/Matrix.dir/src/driver.cpp.o
+.PHONY : src/driver.cpp.o
+
+src/driver.i: src/driver.cpp.i
+.PHONY : src/driver.i
+
+# target to preprocess a source file
+src/driver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Matrix.dir/build.make CMakeFiles/Matrix.dir/src/driver.cpp.i
+.PHONY : src/driver.cpp.i
+
+src/driver.s: src/driver.cpp.s
+.PHONY : src/driver.s
+
+# target to generate assembly for a file
+src/driver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Matrix.dir/build.make CMakeFiles/Matrix.dir/src/driver.cpp.s
+.PHONY : src/driver.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Matrix"
+	@echo "... src/driver.o"
+	@echo "... src/driver.i"
+	@echo "... src/driver.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

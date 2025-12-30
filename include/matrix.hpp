@@ -4,6 +4,7 @@
 #include "ibuffer.hpp"
 #include "buffer.hpp"
 #include "imatrix.hpp"
+#include "cmp.hpp"
 #include <utility>
 
 namespace matrix {
@@ -20,7 +21,12 @@ public:
     Matrix(std::size_t n_rows, std::size_t n_columns) 
         : n_rows_{n_rows}
         , n_columns_{n_columns}
-        , data_{std::make_unique<Buffer<T>>(n_rows, n_columns)}
+        , data_{std::make_unique<Buffer<T>>(n_rows_, n_columns_)}
+        {}
+    Matrix(std::size_t size)
+        : n_rows_{size}
+        , n_columns_{size}
+        , data_{std::make_unique<Buffer<T>>(n_rows_, n_columns_)}
         {}
 
     Matrix(const Matrix&) = delete;
@@ -38,20 +44,38 @@ public:
     /*——————————————————————————————————————— IMatrix ———————————————————————————————————————————*/
     ~Matrix() override = default;
     
-    [[nodiscard]] std::size_t get_n_rows() const noexcept { return n_rows_; }
+    [[nodiscard]] std::size_t get_n_rows()    const noexcept { return n_rows_; }
     [[nodiscard]] std::size_t get_n_columns() const noexcept { return n_columns_; }
-    [[nodiscard]] std::size_t get_size() const noexcept { return n_rows_ * n_columns_; }
+    [[nodiscard]] std::size_t get_size()      const noexcept { return n_rows_ * n_columns_; }
 
     [[nodiscard]] const T* get_data() const noexcept { return data_->get_data(); }
     [[nodiscard]]       T* get_data()       noexcept { return data_->get_data(); }
     /*———————————————————————————————————————————————————————————————————————————————————————————*/
 
+    [[nodiscard]] bool is_square() const noexcept { return n_rows_ == n_columns_; }
+
+    T calculate_determinant() {
+        if (!is_square()) {
+            throw std::runtime_error("it is impossible to calculate the determinant of a non-square matrix\n");
+        }
+        std::size_t size = n_rows_;
+
+        if (size == 0) return static_cast<T>(1);
+        if (size == 1) return *((*this).data_->get_data());
+
+        
+        
+        return 1;
+    }
+
+
     void insert(std::size_t i, std::size_t j, const T& value) {
         if (i >= n_rows_ || j >= n_columns_) {
-            throw std::runtime_error("the insertion area exceeds the size of the buffer");
+            throw std::runtime_error("the insertion area exceeds the size of the buffer\n");
         }
         data_->get_data()[i * n_columns_ + j] = value;
     }
+
 private:
     void swap(Matrix & rhs) noexcept {
         std::swap(n_rows_, rhs.n_rows_);

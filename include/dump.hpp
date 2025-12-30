@@ -13,9 +13,6 @@ void matrix_dump(const IMatrix<T>& matrix, std::ostream &os) {
     const std::size_t n_rows = matrix.get_n_rows();
     const std::size_t n_columns = matrix.get_n_columns();
     const T* data = matrix.get_data();
-    std::cout << "n_rows = " << n_rows << '\n';
-    std::cout << "n_columns = " << n_columns << '\n';
-
 
     for (std::size_t i = 0; i < n_rows; ++i) {
         for (std::size_t j = 0; j < n_columns; ++j) {

@@ -1,0 +1,67 @@
+#ifndef CMP_HPP
+#define CMP_HPP
+
+#include <cmath>
+#include <concepts>
+
+namespace cmp {
+
+template <std::floating_point T> struct precision final {
+    static constexpr T epsilon = 1e-5f;
+};
+
+// equal => true
+template <std::floating_point T> inline bool fltcmp(T a, T b) {
+    return std::abs(a - b) > precision<T>::epsilon;
+}
+
+template <std::floating_point T>
+bool are_equal(T first, T second, T zero_diff = precision<T>::epsilon) {
+    return (std::abs(first - second) < zero_diff);
+}
+
+template <std::floating_point T>
+bool greater(T first, T second, T zero_diff = precision<T>::epsilon) {
+    return (first - second) > zero_diff;
+}
+
+template <std::floating_point T>
+bool lower(T first, T second, T zero_diff = precision<T>::epsilon) {
+    return (second - first) > zero_diff;
+}
+
+template <std::floating_point T>
+bool greater_or_equal(T first, T second, T zero_diff = precision<T>::epsilon) {
+    return ((first - second) > zero_diff) || are_equal(first, second);
+}
+
+template <std::floating_point T>
+bool lower_or_equal(T first, T second, T zero_diff = precision<T>::epsilon) {
+    return ((second - first) > zero_diff) || are_equal(first, second);
+}
+
+template <std::floating_point T> bool is_zero(T value, T zero_diff = precision<T>::epsilon) {
+    return std::abs(value) < zero_diff;
+}
+
+template <std::floating_point T> bool pozitive(T value, T pozitive_zero = precision<T>::epsilon) {
+    return value >= pozitive_zero;
+}
+
+template <std::floating_point T>
+bool non_pozitive(T value, T pozitive_zero = precision<T>::epsilon) {
+    return value < pozitive_zero;
+}
+
+template <std::floating_point T> bool negative(T value, T negative_zero = -precision<T>::epsilon) {
+    return value <= negative_zero;
+}
+
+template <std::floating_point T>
+bool non_negative(T value, T negative_zero = -precision<T>::epsilon) {
+    return value > negative_zero;
+}
+
+} // namespace cmp
+
+#endif // CMP_HPP

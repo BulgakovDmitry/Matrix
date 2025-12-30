@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Matrix.dir/link.d"
+  "CMakeFiles/Matrix.dir/src/driver.cpp.o"
+  "CMakeFiles/Matrix.dir/src/driver.cpp.o.d"
   "CMakeFiles/Matrix.dir/src/main.cpp.o"
   "CMakeFiles/Matrix.dir/src/main.cpp.o.d"
   "Matrix"

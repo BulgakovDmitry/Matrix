@@ -85,12 +85,12 @@ clean: CMakeFiles/Matrix.dir/clean
 CMakeFiles/Matrix.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Matrix.dir/build.make CMakeFiles/Matrix.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Matrix.dir/build.make CMakeFiles/Matrix.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/dima/Desktop/coding/coding_C++/Matrix/build/CMakeFiles --progress-num=1,2 "Built target Matrix"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/dima/Desktop/coding/coding_C++/Matrix/build/CMakeFiles --progress-num=1,2,3 "Built target Matrix"
 .PHONY : CMakeFiles/Matrix.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Matrix.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dima/Desktop/coding/coding_C++/Matrix/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dima/Desktop/coding/coding_C++/Matrix/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Matrix.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/dima/Desktop/coding/coding_C++/Matrix/build/CMakeFiles 0
 .PHONY : CMakeFiles/Matrix.dir/rule
@@ -102,7 +102,7 @@ Matrix: CMakeFiles/Matrix.dir/rule
 # codegen rule for target.
 CMakeFiles/Matrix.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Matrix.dir/build.make CMakeFiles/Matrix.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/dima/Desktop/coding/coding_C++/Matrix/build/CMakeFiles --progress-num=1,2 "Finished codegen for target Matrix"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/dima/Desktop/coding/coding_C++/Matrix/build/CMakeFiles --progress-num=1,2,3 "Finished codegen for target Matrix"
 .PHONY : CMakeFiles/Matrix.dir/codegen
 
 # clean rule for target.
