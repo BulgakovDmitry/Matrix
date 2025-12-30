@@ -6,7 +6,7 @@
 
 namespace matrix {
 
-template<typename T>
+template<std::floating_point T>
 struct IMatrix {
     virtual ~IMatrix() = default;
 

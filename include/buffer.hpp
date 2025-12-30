@@ -10,7 +10,7 @@
 
 namespace matrix {
 
-template<typename T>
+template<std::floating_point T>
 class Buffer final : public IBuffer<T> {    
 private:
     T* data_{nullptr};
@@ -52,6 +52,10 @@ public:
 
     std::size_t get_size()     const noexcept override { return size_;     }
     std::size_t get_capacity() const noexcept override { return capacity_; }
+
+    std::unique_ptr<IBuffer<T>> clone() const override {
+        return std::make_unique<Buffer>(*this);
+    }
     /*———————————————————————————————————————————————————————————————————————————————————————————*/
 
 private:

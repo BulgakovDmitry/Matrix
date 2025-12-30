@@ -9,7 +9,7 @@
 
 namespace matrix {
 
-template<typename T>
+template<std::floating_point T>
 class Matrix final : public IMatrix<T> {
 private:
     std::size_t n_rows_{0};
@@ -18,19 +18,32 @@ private:
 
 public:
     Matrix() = default;
+
     Matrix(std::size_t n_rows, std::size_t n_columns) 
         : n_rows_{n_rows}
         , n_columns_{n_columns}
         , data_{std::make_unique<Buffer<T>>(n_rows_, n_columns_)}
         {}
+
     Matrix(std::size_t size)
         : n_rows_{size}
         , n_columns_{size}
         , data_{std::make_unique<Buffer<T>>(n_rows_, n_columns_)}
         {}
 
-    Matrix(const Matrix&) = delete;
-    Matrix& operator=(const Matrix&) = delete; 
+    Matrix(const Matrix& rhs) 
+        : n_rows_(rhs.n_rows_)
+        , n_columns_(rhs.n_columns_)
+        , data_(rhs.data_ ? rhs.data->clone() : nullptr)
+        {}
+
+    Matrix& operator=(const Matrix& rhs) {
+        if (this == std::addressof(rhs)) return rhs;
+
+        Matrix tmp(rhs);
+        swap(tmp);
+        return *this;
+    }
 
     Matrix(Matrix&& rhs) noexcept {
         swap(rhs); 
@@ -54,16 +67,22 @@ public:
 
     [[nodiscard]] bool is_square() const noexcept { return n_rows_ == n_columns_; }
 
-    T calculate_determinant() {
+    template<typename T>
+    T calculate_determinant() const {
         if (!is_square()) {
             throw std::runtime_error("it is impossible to calculate the determinant of a non-square matrix\n");
         }
+
         std::size_t size = n_rows_;
 
         if (size == 0) return static_cast<T>(1);
-        if (size == 1) return *((*this).data_->get_data());
+        if (size == 1) return *(data_->get_data());
+
+        Matrix tmp(*this);
+        T* a = tmp.data_->get_data();
 
         
+        //TODO
         
         return 1;
     }
@@ -82,6 +101,8 @@ private:
         std::swap(n_columns_, rhs.n_columns_);
         std::swap(data_, rhs.data_);
     }
+
+    enum class Sign : bool {positive, negative};
     
 };
 

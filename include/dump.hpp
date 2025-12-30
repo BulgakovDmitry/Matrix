@@ -6,7 +6,7 @@
 
 namespace matrix {
 
-template<typename T>
+template<std::floating_point T>
 void matrix_dump(const IMatrix<T>& matrix, std::ostream &os) {
     os << "Matrix dump: {\n";
 

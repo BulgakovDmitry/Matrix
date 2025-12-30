@@ -7,7 +7,7 @@
 
 namespace matrix {
 
-template<typename T>
+template<std::floating_point T>
 struct IBuffer { 
     virtual ~IBuffer() = default;
 
@@ -17,6 +17,8 @@ struct IBuffer {
     virtual std::size_t get_size()     const noexcept = 0;
     virtual std::size_t get_capacity() const noexcept = 0;
     /*———————————————————————————————————————————————————————————————————————————————————————————*/
+
+    virtual std::unique_ptr<IBuffer<T>> clone() const = 0;
 };
 
 } // namespace matrix
