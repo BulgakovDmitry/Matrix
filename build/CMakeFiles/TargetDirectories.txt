@@ -1,3 +1,0 @@
-/home/dima/Desktop/coding/coding_C++/Matrix/build/CMakeFiles/Matrix.dir
-/home/dima/Desktop/coding/coding_C++/Matrix/build/CMakeFiles/edit_cache.dir
-/home/dima/Desktop/coding/coding_C++/Matrix/build/CMakeFiles/rebuild_cache.dir
