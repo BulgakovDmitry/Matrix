@@ -72,26 +72,21 @@ public:
             throw std::runtime_error("it is impossible to calculate the determinant of a non-square matrix\n");
         }
 
-        std::size_t size = n_rows_;
-
-        if (size == 0) return (T)1;
-        if (size == 1) return *(data_->get_data());
+        if (n_rows_ == 0) return T(1);
+        if (n_rows_ == 1) return *(data_->get_data());
 
         Matrix tmp(*this);
-        T* data = tmp.data_->get_data();
 
-        auto idx = [size](std::size_t i, std::size_t j) -> std::size_t {
-            return i * size + j;
-        };
+        T* data = tmp.data_->get_data();
 
         int sign = 1;
 
-        for (std::size_t k = 0; k < size; ++k) {
+        for (std::size_t k = 0; k < n_rows_; ++k) {
             // ищем строку с максимальным |a[i][k]|
             std::size_t p = k;
-            T best = std::abs(data[idx(k, k)]);
-            for (std::size_t i = k + 1; i < size; ++i) {
-                const T cur = std::abs(data[idx(i, k)]);
+            T best = std::abs(data[k * n_rows_ + k]);
+            for (std::size_t i = k + 1; i < n_rows_; ++i) {
+                const T cur = std::abs(data[i * n_rows_ + k]);
                 if (cur > best) {
                     best = cur;
                     p = i;
@@ -104,30 +99,30 @@ public:
 
             // swap rows => меняется знак det
             if (p != k) {
-                for (std::size_t j = 0; j < size; ++j) {
-                    std::swap(data[idx(k, j)], data[idx(p, j)]);
+                for (std::size_t j = 0; j < n_rows_; ++j) {
+                    std::swap(data[k * n_rows_ + j], data[p * n_rows_ + j]);
                 }
                 sign = -sign;
             }
 
-            const T pivot = data[idx(k, k)];
+            const T pivot = data[k * n_rows_ + k];
             if (cmp::is_zero(pivot)) {
                 return T(0);
             }
 
             // зануляем элементы ниже диагонали
-            for (std::size_t i = k + 1; i < size; ++i) {
-                const T factor = data[idx(i, k)] / pivot;
-                data[idx(i, k)] = T(0);
-                for (std::size_t j = k + 1; j < size; ++j) {
-                    data[idx(i, j)] -= factor * data[idx(k, j)];
+            for (std::size_t i = k + 1; i < n_rows_; ++i) {
+                const T factor = data[i * n_rows_ + k] / pivot;
+                data[i * n_rows_ + k] = T(0);
+                for (std::size_t j = k + 1; j < n_rows_; ++j) {
+                    data[i * n_rows_ + j] -= factor * data[k * n_rows_ + j];
                 }
             }
         }
 
         T det = (sign > 0) ? T(1) : T(-1);
-        for (std::size_t i = 0; i < size; ++i) {
-            det *= data[idx(i, i)];
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            det *= data[i * n_rows_ + i];
         }
         return det;
     }
