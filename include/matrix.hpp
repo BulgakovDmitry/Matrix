@@ -99,9 +99,7 @@ public:
 
             // swap rows => меняется знак det
             if (p != k) {
-                for (std::size_t j = 0; j < n_rows_; ++j) {
-                    std::swap(data[k * n_rows_ + j], data[p * n_rows_ + j]);
-                }
+                tmp.swap_rows(k, p);
                 sign = -sign;
             }
 
@@ -127,6 +125,31 @@ public:
         return det;
     }
 
+    void swap_rows(std::size_t row_1, std::size_t row_2) {
+        if (row_1 == row_2) return;
+        if (row_1 >= n_rows_ || row_2 >= n_rows_) {
+            throw std::out_of_range("swap_rows: row index out of range");
+        }
+
+        T* data = data_->get_data();
+        for (std::size_t j = 0; j < n_columns_; ++j) {
+            std::swap(data[row_1 * n_columns_ + j], 
+                      data[row_2 * n_columns_ + j]);
+        }
+    }
+
+    void swap_columns(std::size_t col_1, std::size_t col_2) {
+        if (col_1 == col_2) return;
+        if (col_1 >= n_columns_ || col_2 >= n_columns_) {
+            throw std::out_of_range("swap_columns: column index out of range");
+        }
+
+        T* data = data_->get_data();
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            std::swap(data[i * n_columns_ + col_1],
+                      data[i * n_columns_ + col_2]);
+        }
+    }
 
     void insert(std::size_t i, std::size_t j, const T& value) {
         if (i >= n_rows_ || j >= n_columns_) {
