@@ -80,20 +80,10 @@ public:
         T* data = tmp.data_->get_data();
 
         int sign = 1;
-
         for (std::size_t k = 0; k < n_rows_; ++k) {
-            // ищем строку с максимальным |a[i][k]|
-            std::size_t p = k;
-            T best = std::abs(data[k * n_rows_ + k]);
-            for (std::size_t i = k + 1; i < n_rows_; ++i) {
-                const T cur = std::abs(data[i * n_rows_ + k]);
-                if (cur > best) {
-                    best = cur;
-                    p = i;
-                }
-            }
+            std::size_t p = tmp.find_row_with_max_abs_value_in_column(k);
 
-            if (cmp::is_zero(best)) {
+            if (cmp::is_zero(data[k * n_rows_ + p])) {
                 return T(0);
             }
 
@@ -164,6 +154,23 @@ private:
         std::swap(n_columns_, rhs.n_columns_);
         std::swap(data_, rhs.data_);
     }    
+
+    std::size_t find_row_with_max_abs_value_in_column(std::size_t column) const {
+        T* data = data_->get_data();
+
+        std::size_t p = column;
+        T best = std::abs(data[column * n_columns_ + column]);
+
+        for (std::size_t i = column + 1; i < n_rows_; ++i) {
+            T cur = std::abs(data[i * n_columns_ + column]);
+            if (cur > best) {
+                best = cur;
+                p = i;
+            }
+        }
+        return p;
+    }
+
 };
 
 } // namespace matrix
