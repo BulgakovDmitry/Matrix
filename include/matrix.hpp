@@ -65,9 +65,17 @@ public:
     [[nodiscard]]       T* get_data()       noexcept { return data_->get_data(); }
     /*———————————————————————————————————————————————————————————————————————————————————————————*/
 
+    const T* operator[](std::size_t i) const noexcept {
+        return data_->get_data() + i * n_columns_;
+    }
+
+    T* operator[](std::size_t i) noexcept {
+        return data_->get_data() + i * n_columns_;
+    }
+
     [[nodiscard]] bool is_square() const noexcept { return n_rows_ == n_columns_; }
 
-    T calculate_determinant() const {
+    T calculate_determinant() const { // TODO // FIXME
         if (!is_square()) {
             throw std::runtime_error("it is impossible to calculate the determinant of a non-square matrix\n");
         }
@@ -79,39 +87,8 @@ public:
 
         T* data = tmp.data_->get_data();
 
-        int sign = 1;
-        for (std::size_t k = 0; k < n_rows_; ++k) {
-            std::size_t p = tmp.find_row_with_max_abs_value_in_column(k);
-
-            if (cmp::is_zero(data[k * n_rows_ + p])) {
-                return T(0);
-            }
-
-            // swap rows => меняется знак det
-            if (p != k) {
-                tmp.swap_rows(k, p);
-                sign = -sign;
-            }
-
-            const T pivot = data[k * n_rows_ + k];
-            if (cmp::is_zero(pivot)) {
-                return T(0);
-            }
-
-            // зануляем элементы ниже диагонали
-            for (std::size_t i = k + 1; i < n_rows_; ++i) {
-                const T factor = data[i * n_rows_ + k] / pivot;
-                data[i * n_rows_ + k] = T(0);
-                for (std::size_t j = k + 1; j < n_rows_; ++j) {
-                    data[i * n_rows_ + j] -= factor * data[k * n_rows_ + j];
-                }
-            }
-        }
-
-        T det = (sign > 0) ? T(1) : T(-1);
-        for (std::size_t i = 0; i < n_rows_; ++i) {
-            det *= data[i * n_rows_ + i];
-        }
+        // TODO 
+        T det = 0;
         return det;
     }
 
@@ -121,10 +98,9 @@ public:
             throw std::out_of_range("swap_rows: row index out of range");
         }
 
-        T* data = data_->get_data();
         for (std::size_t j = 0; j < n_columns_; ++j) {
-            std::swap(data[row_1 * n_columns_ + j], 
-                      data[row_2 * n_columns_ + j]);
+            std::swap((*this)[row_1][j], 
+                      (*this)[row_2][j]);
         }
     }
 
@@ -134,10 +110,9 @@ public:
             throw std::out_of_range("swap_columns: column index out of range");
         }
 
-        T* data = data_->get_data();
         for (std::size_t i = 0; i < n_rows_; ++i) {
-            std::swap(data[i * n_columns_ + col_1],
-                      data[i * n_columns_ + col_2]);
+            std::swap((*this)[i][col_1],
+                      (*this)[i][col_2]);
         }
     }
 
@@ -145,7 +120,7 @@ public:
         if (i >= n_rows_ || j >= n_columns_) {
             throw std::runtime_error("the insertion area exceeds the size of the buffer\n");
         }
-        data_->get_data()[i * n_columns_ + j] = value;
+        (*this)[i][j] = value;
     }
 
 private:
@@ -154,22 +129,6 @@ private:
         std::swap(n_columns_, rhs.n_columns_);
         std::swap(data_, rhs.data_);
     }    
-
-    std::size_t find_row_with_max_abs_value_in_column(std::size_t column) const {
-        T* data = data_->get_data();
-
-        std::size_t p = column;
-        T best = std::abs(data[column * n_columns_ + column]);
-
-        for (std::size_t i = column + 1; i < n_rows_; ++i) {
-            T cur = std::abs(data[i * n_columns_ + column]);
-            if (cur > best) {
-                best = cur;
-                p = i;
-            }
-        }
-        return p;
-    }
 
 };
 
