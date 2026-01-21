@@ -2,7 +2,7 @@
 #define INCLUDE_DUMP_HPP
 
 #include <ostream>
-#include "imatrix.hpp"
+#include "matrix/imatrix.hpp"
 
 namespace matrix {
 

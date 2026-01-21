@@ -1,8 +1,8 @@
 #ifndef INCLUDE_IMATRIX_HPP
 #define INCLUDE_IMATRIX_HPP
 
-#include "ibuffer.hpp"
-#include "buffer.hpp"
+#include "buffer/ibuffer.hpp"
+#include "buffer/buffer.hpp"
 
 namespace matrix {
 

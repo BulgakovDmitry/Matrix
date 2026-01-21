@@ -1,9 +1,9 @@
 #ifndef INCLUDE_MATRIX_HPP
 #define INCLUDE_MATRIX_HPP
 
-#include "ibuffer.hpp"
-#include "buffer.hpp"
-#include "imatrix.hpp"
+#include "buffer/ibuffer.hpp"
+#include "buffer/buffer.hpp"
+#include "matrix/imatrix.hpp"
 #include "cmp.hpp"
 #include <utility>
 

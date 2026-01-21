@@ -1,6 +1,6 @@
 #include <cstddef>
 #include <iostream>
-#include "matrix.hpp"
+#include "matrix/matrix.hpp"
 #include "dump.hpp"
 #include "driver.hpp"
 
