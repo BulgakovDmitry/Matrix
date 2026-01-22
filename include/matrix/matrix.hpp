@@ -163,26 +163,65 @@ private:
         std::swap(data_, rhs.data_);
     }    
 
-    std::size_t find_elem_with_max_modulus_in_column(std::size_t column) const {
-        if (column >= n_columns_) {
-            throw std::runtime_error("out of range");
-        }
-        if (n_rows_ == 0) {
-            throw std::runtime_error("empty matrix");
-        }
-        if (n_rows_ == 1) { return 0; }
+    std::size_t find_elem_with_max_modulus_in_column(std::size_t column, 
+                                                     std::size_t start_row = 0) const {
+        if (column >= n_columns_) { throw std::runtime_error("out of range");          }
+        if (n_rows_ == 0)         { throw std::runtime_error("empty matrix");          }
+        if (start_row >= n_rows_) { throw std::out_of_range("start_row out of range"); }   
 
-        std::size_t pivot_index = 0;
-        T pivot = std::abs((*this)[0][column]);
-        T candidate = (*this)[0][column];
-        for (std::size_t i = 1; i < n_rows_; ++i) {
-            candidate = std::abs((*this)[i][column]);
+        std::size_t pivot_index = start_row;
+        T pivot = std::abs((*this)[start_row][column]);
+        for (std::size_t i = start_row + 1; i < n_rows_; ++i) {
+            T candidate = std::abs((*this)[i][column]);
             if (cmp::greater<T>(candidate, pivot)) {
                 pivot = candidate;
                 pivot_index = i;
             }
         }
         return pivot_index;
+    }
+
+    Matrix<T>& convert_matrix_to_up_triang_form(bool* even_num_of_perms_flag = nullptr) {
+        std::size_t number_of_permutations = 0;
+        const std::size_t n = std::min(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n; ++i) {
+            /*———— выберу pivot такой, что в текущей колонке он по модулю максимальный ——————————*/
+            std::size_t pivot_index = find_elem_with_max_modulus_in_column(i, i);
+            /*———————————————————————————————————————————————————————————————————————————————————*/
+            
+            /*———— переносим pivot-строку на диагональ ——————————————————————————————————————————*/
+            if (pivot_index != i) {
+                swap_rows(pivot_index, i);
+                ++number_of_permutations;
+            }
+            /*———————————————————————————————————————————————————————————————————————————————————*/
+
+            /*———— проверка на нулевой pivot ————————————————————————————————————————————————————*/
+            const T pivot = (*this)[i][i];
+            if (cmp::is_zero(pivot)) { 
+                continue;
+            }
+            /*———————————————————————————————————————————————————————————————————————————————————*/
+
+            /*———— алгоритмом Гаусса приведу текущую колонку к верхнетреуг виду —————————————————*/
+            for (std::size_t j = i + 1; j < n_rows_; ++j) {
+                if (cmp::is_zero((*this)[j][i])) continue; 
+
+                const T factor = (*this)[j][i] / pivot;   
+
+                for (std::size_t k = i; k < n_columns_; ++k) {
+                    (*this)[j][k] -= factor * (*this)[i][k];
+                }
+
+                (*this)[j][i] = T{0};
+            }
+            /*———————————————————————————————————————————————————————————————————————————————————*/
+        }
+
+        if (even_num_of_perms_flag) {
+            *even_num_of_perms_flag = (number_of_permutations % 2 == 0);
+        }
+        return *this;
     }
 
 };
