@@ -93,6 +93,31 @@ public:
         return det;
     }
 
+    void insert(std::size_t i, std::size_t j, const T& value) {
+        if (i >= n_rows_ || j >= n_columns_) {
+            throw std::runtime_error("the insertion area exceeds the size of the buffer\n");
+        }
+        (*this)[i][j] = value;
+    }
+    
+    Matrix transpose() const {
+        Matrix tmp(n_columns_, n_rows_);
+
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                tmp[j][i] = (*this)[i][j];
+            }
+        }
+        return tmp;
+    }
+
+private:
+    void swap(Matrix & rhs) noexcept {
+        std::swap(n_rows_, rhs.n_rows_);
+        std::swap(n_columns_, rhs.n_columns_);
+        std::swap(data_, rhs.data_);
+    }    
+
     void swap_rows(std::size_t row_1, std::size_t row_2) {
         if (row_1 == row_2) return;
         if (row_1 >= n_rows_ || row_2 >= n_rows_) {
@@ -116,20 +141,6 @@ public:
                       (*this)[i][col_2]);
         }
     }
-
-    void insert(std::size_t i, std::size_t j, const T& value) {
-        if (i >= n_rows_ || j >= n_columns_) {
-            throw std::runtime_error("the insertion area exceeds the size of the buffer\n");
-        }
-        (*this)[i][j] = value;
-    }
-
-private:
-    void swap(Matrix & rhs) noexcept {
-        std::swap(n_rows_, rhs.n_rows_);
-        std::swap(n_columns_, rhs.n_columns_);
-        std::swap(data_, rhs.data_);
-    }    
 
     std::size_t find_elem_with_max_modulus_in_column(std::size_t column, 
                                                      std::size_t start_row = 0) const {

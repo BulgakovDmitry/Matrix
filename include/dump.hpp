@@ -23,6 +23,12 @@ void matrix_dump(const IMatrix<T>& matrix, std::ostream &os) {
     os << "}\n";
 }
 
+template<std::floating_point T>
+std::ostream& operator<<(std::ostream& os, const IMatrix<T>& matrix) {
+    matrix_dump(matrix, os);
+    return os;
+}
+
 } // namespace matrix
 
 #endif // INCLUDE_DUMP_HPP
