@@ -86,7 +86,22 @@ public:
         Matrix tmp(*this);
 
         T* data = tmp.data_->get_data();
+        for (std::size_t i = 0; i < tmp.n_columns_; ++i) {
+            /*———— выберу pivot такой, что в текущей колонке он по модулю максимальный ——————————————*/
+            std::size_t pivot_index = tmp.find_elem_with_max_modulus_in_column(i);
+            if (cmp::is_zero((*this)[pivot_index][i])) { // весь столбец нулевой
+                return 0;
+            }
+            /*———————————————————————————————————————————————————————————————————————————————————————*/
+            
+            /*———— алгоритмом Гаусса приведу текущую колонку к верхнетреуг виду ——————————————————————*/
+            for (std::size_t j = 0; j < tmp.n_rows_; ++j) {
+                // TODO
+            }
+            /*———————————————————————————————————————————————————————————————————————————————————————*/
 
+        }
+        // det = П(a_{i, i})
         // TODO 
         T det = 0;
         return det;
@@ -129,6 +144,28 @@ private:
         std::swap(n_columns_, rhs.n_columns_);
         std::swap(data_, rhs.data_);
     }    
+
+    std::size_t find_elem_with_max_modulus_in_column(std::size_t column) const {
+        if (column >= n_columns_) {
+            throw std::runtime_error("out of range");
+        }
+        if (n_rows_ == 0) {
+            throw std::runtime_error("empty matrix");
+        }
+        if (n_rows_ == 1) { return 0; }
+
+        std::size_t pivot_index = 0;
+        T pivot = std::abs((*this)[0][column]);
+        T candidate = (*this)[0][column];
+        for (std::size_t i = 1; i < n_rows_; ++i) {
+            candidate = std::abs((*this)[i][column]);
+            if (cmp::greater<T>(candidate, pivot)) {
+                pivot = candidate;
+                pivot_index = i;
+            }
+        }
+        return pivot_index;
+    }
 
 };
 

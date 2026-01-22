@@ -25,12 +25,13 @@ void driver() {
         }
     }
     
-    matrix::matrix_dump<double>(matrix, std::cout);
-    matrix.swap_columns(1, 2);
-    matrix::matrix_dump<double>(matrix, std::cout);
-    matrix.swap_rows(1, 2);
-    matrix::matrix_dump<double>(matrix, std::cout);
-    
+    std::cout << matrix.find_elem_with_max_modulus_in_column(0) << '\n';
+    std::cout << matrix.find_elem_with_max_modulus_in_column(1) << '\n';
+
+    std::cout << matrix.find_elem_with_max_modulus_in_column(2) << '\n';
+    std::cout << matrix.find_elem_with_max_modulus_in_column(3) << '\n';
+
+
     // try {
     //     double determinant = matrix.calculate_determinant();
     //     std::cout << /*"determinant = " <<*/ determinant << '\n';
