@@ -75,53 +75,21 @@ public:
 
     [[nodiscard]] bool is_square() const noexcept { return n_rows_ == n_columns_; }
 
-    T calculate_determinant() const { // TODO // FIXME
-        if (!is_square()) {
-            throw std::runtime_error("it is impossible to calculate the determinant of a non-square matrix\n");
-        }
+    T calculate_determinant() const {
+        if (!is_square()) throw std::runtime_error("determinant of non-square matrix");
 
-        if (n_rows_ == 0) return T(1);
-        if (n_rows_ == 1) return *(data_->get_data());
+        if (n_rows_ == 0) return T{1};
+        if (n_rows_ == 1) return (*this)[0][0];
 
         Matrix tmp(*this);
+        bool perms_even = true;
+        tmp.convert_matrix_to_up_triang_form(std::addressof(perms_even));
 
-        std::size_t number_of_permutations = 0;
-        for (std::size_t i = 0; i < tmp.n_columns_; ++i) {
-            /*———— выберу pivot такой, что в текущей колонке он по модулю максимальный ——————————*/
-            std::size_t pivot_index = tmp.find_elem_with_max_modulus_in_column(i);
-            /*———————————————————————————————————————————————————————————————————————————————————*/
-            
-            /*———— если весь столбец нулевой, то и det = 0 ——————————————————————————————————————*/
-            if (cmp::is_zero(tmp[pivot_index][i])) { 
-                return 0;
-            }
-            /*———————————————————————————————————————————————————————————————————————————————————*/
+        T det = T{1};
+        for (std::size_t i = 0; i < n_rows_; ++i) det *= tmp[i][i];
+        if (cmp::is_zero(det)) return T{0};
+        if (!perms_even) det = -det;
 
-            /*———— переносим pivot-строку на диагональ ——————————————————————————————————————————*/
-            if (pivot_index != i) {
-                tmp.swap_rows(pivot_index, i);
-                ++number_of_permutations;
-            }
-            /*———————————————————————————————————————————————————————————————————————————————————*/
-
-            /*———— алгоритмом Гаусса приведу текущую колонку к верхнетреуг виду —————————————————*/
-            const T pivot = tmp[i][i];
-            for (std::size_t j = i + 1; j < tmp.n_rows_; ++j) {
-                if (cmp::is_zero(tmp[j][i])) continue; 
-
-                const T factor = tmp[j][i] / pivot;   
-
-                for (std::size_t k = i; k < tmp.n_columns_; ++k) {
-                    tmp[j][k] -= factor * tmp[i][k];
-                }
-
-                tmp[j][i] = T{0};
-            }
-            /*———————————————————————————————————————————————————————————————————————————————————*/
-        }
-        // det = П(a_{i, i})
-        // TODO 
-        T det = 0;
         return det;
     }
 

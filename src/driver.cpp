@@ -5,37 +5,28 @@
 #include "driver.hpp"
 
 void driver() {
-    std::size_t M;
     std::size_t N;
 
-    std::cin >> M >> N;
+    std::cin >> N;
     
-    matrix::Matrix<double> matrix(M, N);
+    matrix::Matrix<double> matrix(N, N);
 
-    double v = 4;
-    
-    for (std::size_t i = 0; i < M; ++i) {
+    double value;
+    for (std::size_t i = 0; i < N; ++i) {
         for (std::size_t j = 0; j < N; ++j) {
-            std::cin >> v;
+            std::cin >> value;
             try {
-                matrix.insert(i, j, v); 
+                matrix.insert(i, j, value); 
             } catch(std::runtime_error& e) {
                 std::cerr << e.what();
             }
         }
     }
-    
-    std::cout << matrix.find_elem_with_max_modulus_in_column(0) << '\n';
-    std::cout << matrix.find_elem_with_max_modulus_in_column(1) << '\n';
 
-    std::cout << matrix.find_elem_with_max_modulus_in_column(2) << '\n';
-    std::cout << matrix.find_elem_with_max_modulus_in_column(3) << '\n';
-
-
-    // try {
-    //     double determinant = matrix.calculate_determinant();
-    //     std::cout << /*"determinant = " <<*/ determinant << '\n';
-    // } catch (std::runtime_error& e) {
-    //     std::cerr << e.what();
-    // }
+    try {
+        double determinant = matrix.calculate_determinant();
+        std::cout << /*"determinant = " <<*/ determinant << '\n';
+    } catch (std::runtime_error& e) {
+        std::cerr << e.what();
+    }
 }
