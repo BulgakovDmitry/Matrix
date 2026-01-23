@@ -51,7 +51,7 @@ public:
 
     Matrix& operator=(Matrix&& rhs) noexcept {
         swap(rhs); 
-        return this;
+        return *this;
     }
 
     /*——————————————————————————————————————— IMatrix ———————————————————————————————————————————*/
