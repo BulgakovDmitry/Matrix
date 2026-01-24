@@ -1,5 +1,3 @@
 #include "driver.hpp"
 
-int main() {
-    driver();
-}
+int main() { driver(); }

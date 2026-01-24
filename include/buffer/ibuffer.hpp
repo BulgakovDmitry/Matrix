@@ -7,14 +7,14 @@
 
 namespace matrix {
 
-template<std::floating_point T>
-struct IBuffer { 
+template <std::floating_point T> struct IBuffer {
     virtual ~IBuffer() = default;
 
-    /*——————————————————————————————————————— getters ———————————————————————————————————————————*/
-    [[nodiscard]] virtual T*          get_data()           noexcept = 0;
-    [[nodiscard]] virtual const T*    get_data()     const noexcept = 0;
-    [[nodiscard]] virtual std::size_t get_size()     const noexcept = 0;
+    /*——————————————————————————————————————— getters
+     * ———————————————————————————————————————————*/
+    [[nodiscard]] virtual T *get_data() noexcept = 0;
+    [[nodiscard]] virtual const T *get_data() const noexcept = 0;
+    [[nodiscard]] virtual std::size_t get_size() const noexcept = 0;
     [[nodiscard]] virtual std::size_t get_capacity() const noexcept = 0;
     /*———————————————————————————————————————————————————————————————————————————————————————————*/
 
