@@ -3,56 +3,56 @@
 
 #include "ibuffer.hpp"
 
-#include <cstddef>
-#include <utility> 
-#include <memory>
-#include <new> 
 #include <algorithm>
+#include <cstddef>
+#include <memory>
+#include <new>
+#include <utility>
 
 namespace matrix {
 
-template<std::floating_point T>
-class Buffer final : public IBuffer<T> {    
-private:
-    T* data_{nullptr};
+template <std::floating_point T> class Buffer final : public IBuffer<T> {
+  private:
+    T *data_{nullptr};
     std::size_t size_{0};
     std::size_t capacity_{0};
 
-public:
+  public:
     Buffer() = default;
 
     explicit Buffer(std::size_t n_cells)
-        : data_{!n_cells ? nullptr : static_cast<T*>(::operator new(n_cells * sizeof(T)))}
-        , size_{n_cells}
-        , capacity_{n_cells}
-    {
+        : data_{!n_cells
+                    ? nullptr
+                    : static_cast<T *>(::operator new(n_cells * sizeof(T)))},
+          size_{n_cells}, capacity_{n_cells} {
         if (data_) {
             std::uninitialized_value_construct_n(data_, n_cells);
         }
     }
-    
+
     Buffer(std::size_t n_rows, std::size_t n_columns)
         : Buffer(n_rows * n_columns) {}
 
-    Buffer(const Buffer&) = delete;
-    Buffer& operator=(const Buffer&) = delete;
+    Buffer(const Buffer &) = delete;
+    Buffer &operator=(const Buffer &) = delete;
 
-    Buffer(Buffer&& rhs) noexcept { swap(rhs); }
-    Buffer& operator=(Buffer&& rhs) noexcept { 
+    Buffer(Buffer &&rhs) noexcept { swap(rhs); }
+    Buffer &operator=(Buffer &&rhs) noexcept {
         swap(rhs);
         return *this;
-    } 
+    }
 
-    /*——————————————————————————————————————— IBuffer ———————————————————————————————————————————*/
+    /*——————————————————————————————————————— IBuffer
+     * ———————————————————————————————————————————*/
     ~Buffer() override {
         std::destroy(data_, data_ + size_);
         ::operator delete(data_);
     }
 
-          T*    get_data()           noexcept override { return data_;     }
-    const T*    get_data()     const noexcept override { return data_;     }
+    T *get_data() noexcept override { return data_; }
+    const T *get_data() const noexcept override { return data_; }
 
-    std::size_t get_size()     const noexcept override { return size_;     }
+    std::size_t get_size() const noexcept override { return size_; }
     std::size_t get_capacity() const noexcept override { return capacity_; }
 
     std::unique_ptr<IBuffer<T>> clone() const override {
@@ -64,8 +64,8 @@ public:
     }
     /*———————————————————————————————————————————————————————————————————————————————————————————*/
 
-private:
-    void swap(Buffer & rhs) noexcept {
+  private:
+    void swap(Buffer &rhs) noexcept {
         std::swap(data_, rhs.data_);
         std::swap(size_, rhs.size_);
         std::swap(capacity_, rhs.capacity_);

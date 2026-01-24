@@ -1,18 +1,18 @@
 #ifndef INCLUDE_DUMP_HPP
 #define INCLUDE_DUMP_HPP
 
-#include <ostream>
 #include "matrix/imatrix.hpp"
+#include <ostream>
 
 namespace matrix {
 
-template<std::floating_point T>
-void matrix_dump(const IMatrix<T>& matrix, std::ostream &os) {
+template <std::floating_point T>
+void matrix_dump(const IMatrix<T> &matrix, std::ostream &os) {
     os << "Matrix dump: {\n";
 
     const std::size_t n_rows = matrix.get_n_rows();
     const std::size_t n_columns = matrix.get_n_columns();
-    const T* data = matrix.get_data();
+    const T *data = matrix.get_data();
 
     for (std::size_t i = 0; i < n_rows; ++i) {
         for (std::size_t j = 0; j < n_columns; ++j) {
@@ -23,8 +23,8 @@ void matrix_dump(const IMatrix<T>& matrix, std::ostream &os) {
     os << "}\n";
 }
 
-template<std::floating_point T>
-std::ostream& operator<<(std::ostream& os, const IMatrix<T>& matrix) {
+template <std::floating_point T>
+std::ostream &operator<<(std::ostream &os, const IMatrix<T> &matrix) {
     matrix_dump(matrix, os);
     return os;
 }
