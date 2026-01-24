@@ -42,8 +42,7 @@ template <std::floating_point T> class Buffer final : public IBuffer<T> {
         return *this;
     }
 
-    /*——————————————————————————————————————— IBuffer
-     * ———————————————————————————————————————————*/
+    /*————————————————————————————————— IBuffer —————————————————————————————*/
     ~Buffer() override {
         std::destroy(data_, data_ + size_);
         ::operator delete(data_);
@@ -62,7 +61,7 @@ template <std::floating_point T> class Buffer final : public IBuffer<T> {
         }
         return out;
     }
-    /*———————————————————————————————————————————————————————————————————————————————————————————*/
+    /*———————————————————————————————————————————————————————————————————————*/
 
   private:
     void swap(Buffer &rhs) noexcept {
