@@ -46,8 +46,7 @@ template <std::floating_point T> class Matrix final : public IMatrix<T> {
         return *this;
     }
 
-    /*——————————————————————————————————————— IMatrix
-     * ———————————————————————————————————————————*/
+    /*—————————————————————————————————— IMatrix ————————————————————————————*/
     ~Matrix() override = default;
 
     [[nodiscard]] std::size_t get_n_rows() const noexcept { return n_rows_; }
@@ -62,11 +61,81 @@ template <std::floating_point T> class Matrix final : public IMatrix<T> {
         return data_->get_data();
     }
     [[nodiscard]] T *get_data() noexcept { return data_->get_data(); }
-    /*———————————————————————————————————————————————————————————————————————————————————————————*/
+    /*———————————————————————————————————————————————————————————————————————*/
 
     const T *operator[](std::size_t i) const noexcept {
         return data_->get_data() + i * n_columns_;
     }
+
+    /*————————————————————————— Arithmetic operators ————————————————————————*/
+    Matrix operator+(const Matrix &rhs) const {
+        if (n_rows_ != rhs.n_rows_ || n_columns_ != rhs.n_columns_) {
+            throw std::runtime_error(
+                "it is impossible to add 2 matrices of different sizes");
+        }
+        Matrix tmp(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                tmp[i][j] = (*this)[i][j] + rhs[i][j];
+            }
+        }
+        return tmp;
+    }
+
+    Matrix operator-(const Matrix &rhs) const {
+        if (n_rows_ != rhs.n_rows_ || n_columns_ != rhs.n_columns_) {
+            throw std::runtime_error(
+                "it is impossible to add 2 matrices of different sizes");
+        }
+        Matrix tmp(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                tmp[i][j] = (*this)[i][j] - rhs[i][j];
+            }
+        }
+        return tmp;
+    }
+
+    Matrix operator+=(const Matrix &rhs) const {
+        if (n_rows_ != rhs.n_rows_ || n_columns_ != rhs.n_columns_) {
+            throw std::runtime_error(
+                "it is impossible to add 2 matrices of different sizes");
+        }
+        Matrix tmp(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                tmp[i][j] += (*this)[i][j] + rhs[i][j];
+            }
+        }
+        return tmp;
+    }
+
+    Matrix operator-=(const Matrix &rhs) const {
+        if (n_rows_ != rhs.n_rows_ || n_columns_ != rhs.n_columns_) {
+            throw std::runtime_error(
+                "it is impossible to add 2 matrices of different sizes");
+        }
+        Matrix tmp(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                tmp[i][j] -= (*this)[i][j] + rhs[i][j];
+            }
+        }
+        return tmp;
+    }
+
+    Matrix operator-() const {
+        Matrix tmp(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                tmp[i][j] = -(*this)[i][j];
+            }
+        }
+        return tmp;
+    }
+
+    Matrix operator+() const { return *this; }
+    /*———————————————————————————————————————————————————————————————————————*/
 
     T *operator[](std::size_t i) noexcept {
         return data_->get_data() + i * n_columns_;
@@ -180,30 +249,27 @@ template <std::floating_point T> class Matrix final : public IMatrix<T> {
         std::size_t number_of_permutations = 0;
         const std::size_t n = std::min(n_rows_, n_columns_);
         for (std::size_t i = 0; i < n; ++i) {
-            /*———— выберу pivot такой, что в текущей колонке он по модулю
-             * максимальный ——————————*/
+            /*———————————————————————— I will choose pivot ——————————————————*/
             std::size_t pivot_index =
                 find_elem_with_max_modulus_in_column(i, i);
-            /*———————————————————————————————————————————————————————————————————————————————————*/
+            /*———————————————————————————————————————————————————————————————*/
 
-            /*———— переносим pivot-строку на диагональ
-             * ——————————————————————————————————————————*/
+            /*———— move the pivot row to the diagonal ———————————————————————*/
             if (pivot_index != i) {
                 swap_rows(pivot_index, i);
                 ++number_of_permutations;
             }
-            /*———————————————————————————————————————————————————————————————————————————————————*/
+            /*———————————————————————————————————————————————————————————————*/
 
-            /*———— проверка на нулевой pivot
-             * ————————————————————————————————————————————————————*/
+            /*———— zero pivot check —————————————————————————————————————————*/
             const T pivot = (*this)[i][i];
             if (cmp::is_zero(pivot)) {
                 continue;
             }
-            /*———————————————————————————————————————————————————————————————————————————————————*/
+            /*———————————————————————————————————————————————————————————————*/
 
-            /*———— алгоритмом Гаусса приведу текущую колонку к верхнетреуг виду
-             * —————————————————*/
+            /*———— According to Gauss, I will bring the current column ——————*/
+            /*———— to the upper triangular form.                        —————*/
             for (std::size_t j = i + 1; j < n_rows_; ++j) {
                 if (cmp::is_zero((*this)[j][i]))
                     continue;
@@ -216,7 +282,7 @@ template <std::floating_point T> class Matrix final : public IMatrix<T> {
 
                 (*this)[j][i] = T{0};
             }
-            /*———————————————————————————————————————————————————————————————————————————————————*/
+            /*———————————————————————————————————————————————————————————————*/
         }
 
         if (even_num_of_perms_flag) {
