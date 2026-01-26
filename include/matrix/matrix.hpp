@@ -128,10 +128,10 @@ template <std::floating_point T> class Matrix final : public IMatrix<T> {
         Matrix tmp(n_rows_, n_columns_);
         for (std::size_t i = 0; i < n_rows_; ++i) {
             for (std::size_t j = 0; j < n_columns_; ++j) {
-                result[i][j] = -(*this)[i][j];
+                tmp[i][j] = -(*this)[i][j];
             }
         }
-        return result;
+        return tmp;
     }
 
     Matrix operator+() const { return *this; }
