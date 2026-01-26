@@ -66,6 +66,74 @@ template <std::floating_point T> class Matrix final : public IMatrix<T> {
     const T *operator[](std::size_t i) const noexcept {
         return data_->get_data() + i * n_columns_;
     }
+    
+    /*————————————————————————— Arithmetic operators ————————————————————————*/
+    Matrix operator+ (const Matrix& rhs) const { 
+        if (n_rows_ != rhs.n_rows_ || n_columns_ != rhs.n_columns_) {
+            throw std::runtime_error("it is impossible to add 2 matrices of different sizes");
+        }
+        Matrix tmp(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                tmp[i][j] = (*this)[i][j] + rhs[i][j]; 
+            }
+        }
+        return tmp;
+    }
+
+    Matrix operator- (const Matrix& rhs) const { 
+        if (n_rows_ != rhs.n_rows_ || n_columns_ != rhs.n_columns_) {
+            throw std::runtime_error("it is impossible to add 2 matrices of different sizes");
+        }
+        Matrix tmp(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                tmp[i][j] = (*this)[i][j] - rhs[i][j]; 
+            }
+        }
+        return tmp;
+    }
+
+    Matrix operator+= (const Matrix& rhs) const { 
+        if (n_rows_ != rhs.n_rows_ || n_columns_ != rhs.n_columns_) {
+            throw std::runtime_error("it is impossible to add 2 matrices of different sizes");
+        }
+        Matrix tmp(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                tmp[i][j] += (*this)[i][j] + rhs[i][j]; 
+            }
+        }
+        return tmp;
+    }
+
+    Matrix operator-= (const Matrix& rhs) const { 
+        if (n_rows_ != rhs.n_rows_ || n_columns_ != rhs.n_columns_) {
+            throw std::runtime_error("it is impossible to add 2 matrices of different sizes");
+        }
+        Matrix tmp(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                tmp[i][j] -= (*this)[i][j] + rhs[i][j]; 
+            }
+        }
+        return tmp;
+    }
+
+    Matrix operator-() const {
+        Matrix tmp(n_rows_, n_columns_);
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                result[i][j] = -(*this)[i][j];
+            }
+        }
+        return result;
+    }
+
+    Matrix operator+() const {
+        return *this;
+    }
+    /*———————————————————————————————————————————————————————————————————————*/
 
     T *operator[](std::size_t i) noexcept {
         return data_->get_data() + i * n_columns_;
