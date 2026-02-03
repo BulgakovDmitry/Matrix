@@ -82,7 +82,7 @@ template <std::floating_point T> class Buffer final : public IBuffer<T> {
         std::swap(capacity_, rhs.capacity_);
     }
 
-    private:
+  private:
     // some methods
 };
 
