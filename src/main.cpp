@@ -16,7 +16,7 @@ int main() {
             std::cin >> value;
             try {
                 matrix.insert(i, j, value);
-            } catch (std::runtime_error &e) {
+            } catch (const std::runtime_error &e) {
                 std::cerr << e.what();
                 return 1;
             }
@@ -26,7 +26,8 @@ int main() {
     try {
         double determinant = matrix.calculate_determinant();
         std::cout << /*"determinant = " <<*/ determinant << '\n';
-    } catch (std::runtime_error &e) {
+    } catch (const std::runtime_error &e) {
         std::cerr << e.what();
+        return 1;
     }
 }
