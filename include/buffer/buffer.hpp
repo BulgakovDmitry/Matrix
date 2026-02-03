@@ -33,7 +33,7 @@ template <std::floating_point T> class Buffer final : public IBuffer<T> {
     Buffer(std::size_t n_rows, std::size_t n_columns)
         : Buffer(n_rows * n_columns) {}
 
-    Buffer(const Buffer & rhs) {
+    Buffer(const Buffer &rhs) {
         Buffer temp(rhs.capacity_);
         if (rhs.capacity_ != 0) {
             std::copy_n(rhs.data_, rhs.capacity_, temp.data_);
