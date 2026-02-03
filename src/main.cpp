@@ -18,6 +18,7 @@ int main() {
                 matrix.insert(i, j, value);
             } catch (std::runtime_error &e) {
                 std::cerr << e.what();
+                return 1;
             }
         }
     }
