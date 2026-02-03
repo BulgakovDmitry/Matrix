@@ -6,7 +6,7 @@
 
 namespace cmp {
 
-template<std::floating_point T> constexpr T epsilon = 1e-5f;
+template <std::floating_point T> constexpr T epsilon = 1e-5f;
 
 // equal => true
 template <std::floating_point T> inline bool fltcmp(T a, T b) {
