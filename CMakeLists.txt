@@ -9,7 +9,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(Matrix
     src/main.cpp
-    src/driver.cpp
 )
 
 target_include_directories(Matrix PRIVATE

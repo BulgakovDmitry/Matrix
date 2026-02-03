@@ -76,12 +76,14 @@ template <std::floating_point T> class Buffer final : public IBuffer<T> {
     }
     /*———————————————————————————————————————————————————————————————————————*/
 
-  private:
     void swap(Buffer &rhs) noexcept {
         std::swap(data_, rhs.data_);
         std::swap(size_, rhs.size_);
         std::swap(capacity_, rhs.capacity_);
     }
+
+    private:
+    // some methods
 };
 
 } // namespace matrix

@@ -1,18 +1,31 @@
-#include "driver.hpp"
 #include "dump.hpp"
 #include "matrix/matrix.hpp"
+#include <cstddef>
 #include <iostream>
 
 int main() {
-    driver();
-    // matrix::Matrix<double> a(2);
-    // matrix::Matrix<double> b(2);
+    std::size_t N;
 
-    // a[0][0] = 1;   a[0][1] = 2;
-    // a[1][0] = 3;   a[1][1] = 4;
+    std::cin >> N;
 
-    // b[0][0] = 5;   b[0][1] = 6;
-    // b[1][0] = 7;   b[1][1] = 8;
+    matrix::Matrix<double> matrix(N, N);
 
-    // std::cout << a << " + " << b << " = " << a + b;
+    double value;
+    for (std::size_t i = 0; i < N; ++i) {
+        for (std::size_t j = 0; j < N; ++j) {
+            std::cin >> value;
+            try {
+                matrix.insert(i, j, value);
+            } catch (std::runtime_error &e) {
+                std::cerr << e.what();
+            }
+        }
+    }
+
+    try {
+        double determinant = matrix.calculate_determinant();
+        std::cout << /*"determinant = " <<*/ determinant << '\n';
+    } catch (std::runtime_error &e) {
+        std::cerr << e.what();
+    }
 }
