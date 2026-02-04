@@ -5,7 +5,6 @@
 #include "buffer/ibuffer.hpp"
 #include "cmp.hpp"
 #include "matrix/imatrix.hpp"
-#include <boost/multiprecision/cpp_int.hpp>
 #include <cmath>
 #include <utility>
 #include <vector>
