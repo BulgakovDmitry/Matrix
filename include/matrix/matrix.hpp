@@ -1,14 +1,14 @@
 #ifndef INCLUDE_MATRIX_HPP
 #define INCLUDE_MATRIX_HPP
 
-#include <boost/multiprecision/cpp_int.hpp>
-#include <cmath>
-#include <vector>
 #include "buffer/buffer.hpp"
 #include "buffer/ibuffer.hpp"
 #include "cmp.hpp"
 #include "matrix/imatrix.hpp"
+#include <boost/multiprecision/cpp_int.hpp>
+#include <cmath>
 #include <utility>
+#include <vector>
 
 namespace matrix {
 
@@ -189,12 +189,14 @@ template <std::floating_point T> class Matrix final : public IMatrix<T> {
         std::swap(data_, rhs.data_);
     }
 
-    [[nodiscard]] bool is_almost_integer_matrix(T eps = static_cast<T>(1e-9)) const {
+    [[nodiscard]] bool
+    is_almost_integer_matrix(T eps = static_cast<T>(1e-9)) const {
         for (std::size_t i = 0; i < n_rows_; ++i) {
             for (std::size_t j = 0; j < n_columns_; ++j) {
                 T x = (*this)[i][j];
                 T r = static_cast<T>(std::llround(x));
-                if (!cmp::are_equal(x, r, eps)) return false;
+                if (!cmp::are_equal(x, r, eps))
+                    return false;
             }
         }
         return true;
