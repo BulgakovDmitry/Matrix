@@ -1,6 +1,9 @@
 #ifndef INCLUDE_MATRIX_HPP
 #define INCLUDE_MATRIX_HPP
 
+#include <boost/multiprecision/cpp_int.hpp>
+#include <cmath>
+#include <vector>
 #include "buffer/buffer.hpp"
 #include "buffer/ibuffer.hpp"
 #include "cmp.hpp"
@@ -154,19 +157,10 @@ template <std::floating_point T> class Matrix final : public IMatrix<T> {
         if (n_rows_ == 1)
             return (*this)[0][0];
 
-        Matrix tmp(*this);
-        bool perms_even = true;
-        tmp.convert_matrix_to_up_triang_form(std::addressof(perms_even));
-
-        T det = T{1};
-        for (std::size_t i = 0; i < n_rows_; ++i)
-            det *= tmp[i][i];
-        if (cmp::is_zero(det))
-            return T{0};
-        if (!perms_even)
-            det = -det;
-
-        return det;
+        // if (is_almost_integer_matrix()) {
+        //     return calculate_determinant_bareiss_exact();
+        // }
+        return calculate_determinant_gauss();
     }
 
     void insert(std::size_t i, std::size_t j, const T &value) {
@@ -193,6 +187,33 @@ template <std::floating_point T> class Matrix final : public IMatrix<T> {
         std::swap(n_rows_, rhs.n_rows_);
         std::swap(n_columns_, rhs.n_columns_);
         std::swap(data_, rhs.data_);
+    }
+
+    [[nodiscard]] bool is_almost_integer_matrix(T eps = static_cast<T>(1e-9)) const {
+        for (std::size_t i = 0; i < n_rows_; ++i) {
+            for (std::size_t j = 0; j < n_columns_; ++j) {
+                T x = (*this)[i][j];
+                T r = static_cast<T>(std::llround(x));
+                if (!cmp::are_equal(x, r, eps)) return false;
+            }
+        }
+        return true;
+    }
+
+    T calculate_determinant_gauss() const {
+        Matrix tmp(*this);
+        bool perms_even = true;
+        tmp.convert_matrix_to_up_triang_form(std::addressof(perms_even));
+
+        T det = T{1};
+        for (std::size_t i = 0; i < n_rows_; ++i)
+            det *= tmp[i][i];
+        if (cmp::is_zero(det))
+            return T{0};
+        if (!perms_even)
+            det = -det;
+
+        return det;
     }
 
     void swap_rows(std::size_t row_1, std::size_t row_2) {
